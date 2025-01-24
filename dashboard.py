@@ -107,7 +107,7 @@ day_df['windspeed_category'] = pd.cut(day_df['windspeed'], bins=windspeed_bins, 
 average_cnt_by_windspeed = day_df.groupby('windspeed_category', observed=False)['cnt'].mean()
 
 fig, ax = plt.subplots(figsize=(6, 5))
-colors = sns.color_palette("Oranges", len(average_cnt_by_windspeed))
+colors = sns.color_palette("Greys", len(average_cnt_by_windspeed))
 sns.barplot(x=average_cnt_by_windspeed.index, y=average_cnt_by_windspeed.values, palette=colors, hue=average_cnt_by_windspeed.index, legend=False)
 #ax.set_title('Rata-Rata Jumlah Penyewaan Sepeda berdasarkan Kategori Windspeed')
 ax.set_xlabel('Kategori Windspeed')
@@ -157,7 +157,7 @@ day_df['temp_category'] = pd.cut(day_df['temp'], bins=temp_bins, labels=temp_lab
 average_cnt_by_temp = day_df.groupby('temp_category', observed=False)['cnt'].mean()
 
 fig, ax = plt.subplots(figsize=(6, 5))
-colors = sns.color_palette("Blues", len(average_cnt_by_temp))
+colors = sns.color_palette("Oranges", len(average_cnt_by_temp))
 sns.barplot(x=average_cnt_by_temp.index, y=average_cnt_by_temp.values, palette=colors, hue=average_cnt_by_temp.index, legend=False)
 #ax.set_title('Rata-Rata Jumlah Penyewaan Sepeda berdasarkan Kategori Temperature')
 ax.set_xlabel('Kategori Temperature')
