@@ -96,3 +96,78 @@ user_table = pd.DataFrame({
     'Rata-Rata Jml Penyewaan Sepeda': user_avg.values })
 user_table['Rata-Rata Jml Penyewaan Sepeda'] = user_table['Rata-Rata Jml Penyewaan Sepeda'].round(0)
 st.write(user_table)
+
+# Rata-rata Penyewaan Sepeda berdasarkan Kategori Windspeed
+st.subheader('Rata-Rata Penyewaan Sepeda berdasarkan Kategori Windspeed')
+
+windspeed_bins = [0, 0.1, 0.3, 0.5, 1]  # Rentang kecepatan angin (windspeed)
+windspeed_labels = ['Low', 'Medium', 'High', 'Very High']
+
+day_df['windspeed_category'] = pd.cut(day_df['windspeed'], bins=windspeed_bins, labels=windspeed_labels)
+average_cnt_by_windspeed = day_df.groupby('windspeed_category', observed=False)['cnt'].mean()
+
+fig, ax = plt.subplots(figsize=(6, 5))
+colors = sns.color_palette("Oranges", len(average_cnt_by_windspeed))
+sns.barplot(x=average_cnt_by_windspeed.index, y=average_cnt_by_windspeed.values, palette=colors, hue=average_cnt_by_windspeed.index, legend=False)
+ax.set_title('Rata-Rata Jumlah Penyewaan Sepeda berdasarkan Kategori Windspeed')
+ax.set_xlabel('Kategori Windspeed')
+ax.set_ylabel('Rata Rata Jml Penyewaan Sepeda')
+plt.tight_layout()
+st.pyplot(fig)
+
+windspeed_table = pd.DataFrame({
+    'Kategori Windspeed': windspeed_labels,
+    'Rata-Rata Penyewaan Sepeda': average_cnt_by_windspeed.values
+})
+windspeed_table['Rata-Rata Penyewaan Sepeda'] = windspeed_table['Rata-Rata Penyewaan Sepeda'].round(0)
+st.write(windspeed_table)
+
+# Rata-rata Penyewaan Sepeda berdasarkan Kategori Humidity
+st.subheader('Rata-Rata Penyewaan Sepeda berdasarkan Kategori Humidity')
+
+hum_bins = [0, 0.4, 0.7, 1]  # Rentang kelembapan (hum)
+hum_labels = ['Low', 'Medium', 'High']
+
+day_df['hum_category'] = pd.cut(day_df['hum'], bins=hum_bins, labels=hum_labels)
+average_cnt_by_hum = day_df.groupby('hum_category', observed=False)['cnt'].mean()
+
+fig, ax = plt.subplots(figsize=(6, 5))
+colors = sns.color_palette("Greens", len(average_cnt_by_hum))
+sns.barplot(x=average_cnt_by_hum.index, y=average_cnt_by_hum.values, palette=colors, hue=average_cnt_by_hum.index, legend=False)
+ax.set_title('Rata-Rata Jumlah Penyewaan Sepeda berdasarkan Kategori Humidity')
+ax.set_xlabel('Kategori Humidity')
+ax.set_ylabel('Rata-Rata Jml Penyewaan Sepeda')
+plt.tight_layout()
+st.pyplot(fig)
+
+humidity_table = pd.DataFrame({
+    'Kategori Humidity': hum_labels,
+    'Rata-Rata Penyewaan Sepeda': average_cnt_by_hum.values
+})
+humidity_table['Rata-Rata Penyewaan Sepeda'] = humidity_table['Rata-Rata Penyewaan Sepeda'].round(0)
+st.write(humidity_table)
+
+# Rata-rata Penyewaan Sepeda berdasarkan Kategori Temperature
+st.subheader('Rata-Rata Penyewaan Sepeda berdasarkan Kategori Temperature')
+
+temp_bins = [0, 0.3, 0.6, 0.8, 1]  # Rentang suhu (temp)
+temp_labels = ['Low', 'Medium', 'High', 'Very High']
+
+day_df['temp_category'] = pd.cut(day_df['temp'], bins=temp_bins, labels=temp_labels)
+average_cnt_by_temp = day_df.groupby('temp_category', observed=False)['cnt'].mean()
+
+fig, ax = plt.subplots(figsize=(6, 5))
+colors = sns.color_palette("Blues", len(average_cnt_by_temp))
+sns.barplot(x=average_cnt_by_temp.index, y=average_cnt_by_temp.values, palette=colors, hue=average_cnt_by_temp.index, legend=False)
+ax.set_title('Rata-Rata Jumlah Penyewaan Sepeda berdasarkan Kategori Temperature')
+ax.set_xlabel('Kategori Temperature')
+ax.set_ylabel('Rata-Rata Jumlah Penyewaan Sepeda')
+plt.tight_layout()
+st.pyplot(fig)
+
+temperature_table = pd.DataFrame({
+    'Kategori Temperature': temp_labels,
+    'Rata-Rata Penyewaan Sepeda': average_cnt_by_temp.values
+})
+temperature_table['Rata-Rata Penyewaan Sepeda'] = temperature_table['Rata-Rata Penyewaan Sepeda'].round(0)
+st.write(temperature_table)
