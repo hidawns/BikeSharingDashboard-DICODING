@@ -14,10 +14,14 @@ with st.sidebar:
     
     st.header("Filter Data")
     
-    start_date, end_date = st.date_input(
-        label='Rentang Waktu', min_value=min_date,
-        max_value=max_date,
-        value=[min_date, max_date]
+    start_date = st.date_input(
+        label="Mulai Tanggal", value=min_date,
+        min_value=min_date, max_value=max_date
+    )
+    
+    end_date = st.date_input(
+        label="Akhir Tanggal", value=max_date,
+        min_value=min_date, max_value=max_date
     )
     
     if start_date > end_date:
