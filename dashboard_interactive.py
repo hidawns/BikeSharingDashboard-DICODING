@@ -5,7 +5,7 @@ import seaborn as sns
 
 day_df = pd.read_csv('processed_day.csv')
 
-st.sidebar.image("bicycle.png", use_column_width=True)
+st.sidebar.image("bicycle.png", use_container_width=True)
 st.sidebar.header("Filter Data")
 
 min_date = day_df['dteday'].min()
