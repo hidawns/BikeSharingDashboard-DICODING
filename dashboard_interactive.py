@@ -6,16 +6,17 @@ import seaborn as sns
 day_df = pd.read_csv('processed_day.csv')
 day_df['dteday'] = pd.to_datetime(day_df['dteday'])
 
-st.sidebar.image("bicycle.png", use_container_width=True)
-st.sidebar.header("Filter Data")
-
-min_date = day_df['dteday'].min()
-max_date = day_df['dteday'].max()
-start_date = st.sidebar.date_input("Mulai Tanggal", min_date, min_value=min_date, max_value=max_date)
-end_date = st.sidebar.date_input("Akhir Tanggal", max_date, min_value=min_date, max_value=max_date)
-
-if start_date > end_date:
-    st.sidebar.error("Tanggal mulai harus lebih kecil atau sama dengan tanggal akhir.")
+with st.sidebar:
+    st.image("bicycle.png", use_container_width=True)
+    st.header("Filter Data")
+    
+    min_date = day_df['dteday'].min()
+    max_date = day_df['dteday'].max()
+    start_date = st.date_input("Mulai Tanggal", min_date, min_value=min_date, max_value=max_date)
+    end_date = st.date_input("Akhir Tanggal", max_date, min_value=min_date, max_value=max_date)
+    
+    if start_date > end_date:
+        st.error("Tanggal mulai harus lebih kecil atau sama dengan tanggal akhir.")
 
 filtered_df = day_df[(day_df['dteday'] >= pd.to_datetime(start_date)) & (day_df['dteday'] <= pd.to_datetime(end_date))]
 
