@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 day_df = pd.read_csv('processed_day.csv')
+day_df['dteday'] = pd.to_datetime(day_df['dteday'])
 
 st.sidebar.image("bicycle.png", use_container_width=True)
 st.sidebar.header("Filter Data")
