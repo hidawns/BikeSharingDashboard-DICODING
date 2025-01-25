@@ -4,21 +4,20 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 day_df = pd.read_csv('processed_day.csv')
-day_df['date'] = pd.to_datetime(day_df['date'])  # Pastikan kolom tanggal dalam format datetime
 
-st.sidebar.image("bicycle.png", use_column_width=True)  # Pastikan file logo.png tersedia
+st.sidebar.image("bicycle.png", use_column_width=True)
 st.sidebar.header("Filter Data")
 
-min_date = day_df['date'].min()
-max_date = day_df['date'].max()
-start_date = st.sidebar.date_input("Mulai Tanggal", min_date, min_value=min_date, max_value=max_date)
-end_date = st.sidebar.date_input("Akhir Tanggal", max_date, min_value=min_date, max_value=max_date)
+min_date = day_df['dteday'].min()
+max_date = day_df['dteday'].max()
+
+start_date = st.sidebar.date_input("Tanggal Mulai", min_date, min_value=min_date, max_value=max_date)
+end_date = st.sidebar.date_input("Tanggal Akhir", max_date, min_value=min_date, max_value=max_date)
 
 if start_date > end_date:
     st.sidebar.error("Tanggal mulai harus lebih kecil atau sama dengan tanggal akhir.")
 
-# Filter data berdasarkan tanggal
-filtered_df = day_df[(day_df['date'] >= pd.to_datetime(start_date)) & (day_df['date'] <= pd.to_datetime(end_date))]
+filtered_df = day_df[(day_df['dteday'] >= start_date) & (day_df['dteday'] <= end_date)]
 
 st.title('Dashboard Permintaan Penyewaan Sepeda')
 
