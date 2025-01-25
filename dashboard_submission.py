@@ -10,13 +10,10 @@ min_date = day_df['dteday'].min()
 max_date = day_df['dteday'].max()
 
 with st.sidebar:
-    # Menambahkan logo perusahaan
     st.image("bicycle.png")
     
-    # Menambahkan filter data
     st.header("Filter Data")
     
-    # Mengambil start_date & end_date dari date_input
     start_date, end_date = st.date_input(
         label='Rentang Waktu', min_value=min_date,
         max_value=max_date,
