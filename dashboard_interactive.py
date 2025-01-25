@@ -18,7 +18,7 @@ end_date = st.sidebar.date_input("Tanggal Akhir", max_date, min_value=min_date, 
 if start_date > end_date:
     st.sidebar.error("Tanggal mulai harus lebih kecil atau sama dengan tanggal akhir.")
 
-filtered_df = day_df[(day_df['dteday'] >= start_date) & (day_df['dteday'] <= end_date)]
+filtered_df = day_df[(day_df['dteday'] >= pd.to_datetime(start_date)) & (day_df['dteday'] <= pd.to_datetime(end_date))]
 
 st.title('Dashboard Permintaan Penyewaan Sepeda')
 
